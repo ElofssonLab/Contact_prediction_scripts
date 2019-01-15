@@ -10,6 +10,7 @@ alignment = sys.argv[2]
 
 # output:
 contact_pc4 = sys.argv[3]
+ss_structure = sys.argv[4]
 #predict contacs 
 model = pconsc4.get_pconsc4()
 result = pconsc4.predict(model, alignment)
@@ -26,4 +27,5 @@ seq = ''.join(line.strip()
 #write contact prediction 
 with open(contact_pc4, 'w') as f:
     f.write(format_contacts_casp(result['cmap'], seq, min_sep=5))
-
+with open(ss_structure, 'w') as f:
+    f.write(pconsc4.utils.format_ss(pred['ss']['ss3']))
