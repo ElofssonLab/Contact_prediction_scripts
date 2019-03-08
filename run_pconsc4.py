@@ -26,7 +26,7 @@ seq = ''.join(line.strip()
               if not line.startswith('>'))
 #write contact prediction 
 with open(contact_pc4, 'w') as f:
-  f.write(format_contacts_casp(result['cmap'], seq, min_sep=5))
+  f.write(format_contacts_casp(result['cmap'], seq, min_sep=5, full_precision=False))
 #write secondary structure prediction
 with open(ss_structure, 'w') as f:
   f.write(pconsc4.utils.format_ss(pred['ss']['ss3']))
