@@ -3,7 +3,6 @@ import numpy as np
 
 
 def parse(afile, sep=' ', min_dist=5):
-    
     """Parse contact file (PconsCX, plmDCA, PSICOV, PhyCMAP).
     @param  afile   contact file
     @param  sep     separator of contact file (default=' ')
@@ -42,30 +41,27 @@ def parse(afile, sep=' ', min_dist=5):
 
 
 def get_numpy_cmap(contacts, seq_len=-1, min_dist=5):
-
     """Convert contacts into numpy matrix.
     @param  contacts    contact list as obtained from "parse"
     @param  seq_len     sequence length
     @return np.array((seq_len, seq_len), score)
     """
 
-    max_i = max(contacts, key=lambda x:x[1])[1]
-    max_j = max(contacts, key=lambda x:x[2])[2]
+    max_i = max(contacts, key=lambda x: x[1])[1]
+    max_j = max(contacts, key=lambda x: x[2])[2]
     n = int(max(seq_len, max_i, max_j))
-    cmap = np.zeros((n,n))
+    cmap = np.zeros((n, n))
 
     for c in contacts:
         i = c[1] - 1
         j = c[2] - 1
         if abs(i - j) >= min_dist:
-            cmap[i,j] = c[0]
-    
+            cmap[i, j] = c[0]
+
     return cmap
 
 
-
 def write(contacts, outfile, sep=' '):
-
     """Write contact file.
     @param  contacts    contact list
     @param  outfile     output contact file
@@ -74,6 +70,3 @@ def write(contacts, outfile, sep=' '):
 
     for c in contacts:
         outfile.write('%d%s%d%s%f\n' % (c[1], sep, c[2], sep, c[0]))
-
-
-

@@ -26,7 +26,7 @@ def read_fasta(afile, query_id=''):
                 else:
                     seq_dict[header] = [seq]
             seq = ''
-            if aline.startswith('>%s' % query_id) and query_id !='':
+            if aline.startswith('>%s' % query_id) and query_id != '':
                 header = query_id
             else:
                 header = aline[1:]
@@ -71,7 +71,7 @@ def read_fasta_pdb(afile, query_id=''):
                 else:
                     seq_dict[header] = [seq]
             seq = ''
-            if aline.startswith('>%s' % query_id) and query_id !='':
+            if aline.startswith('>%s' % query_id) and query_id != '':
                 header = query_id
             else:
                 header = aline[1:].split()[0]
@@ -109,12 +109,9 @@ def get_residue_dict(afile):
     # header: >tr|UniprotID|UniprotName
     for header, seq_lst in seq_dict.iteritems():
         if header.startswith('embl-cds'):
-            new_header = header.split()[0].split(':')[-1] # embl cds ID
+            new_header = header.split()[0].split(':')[-1]  # embl cds ID
         else:
-            new_header = header.split('|')[1] # UniprotID
+            new_header = header.split('|')[1]  # UniprotID
         res_lst = list(seq_lst[0])
         result_dict[new_header] = res_lst
     return result_dict
-
-
-
