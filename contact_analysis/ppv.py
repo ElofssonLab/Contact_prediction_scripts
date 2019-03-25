@@ -2,17 +2,10 @@ import sys
 import argparse
 from math import *
 
-# on UPPMAX only
-#sys.path.append('/sw/apps/bioinfo/biopython/1.59/tintin/lib/python')
-
 import Bio.PDB
 from Bio import pairwise2
 
 import numpy as np
-
-from os.path import expanduser
-home = expanduser("~")
-sys.path.append(home + '/bioinfo-toolbox')
 
 from parsing import parse_contacts
 from parsing import parse_fasta
@@ -51,7 +44,7 @@ def print_distances(contacts_x, contacts_y, scores, dist_mat, atom_seq_ali=[], o
         if outfile:
             outstr += "%s %s %s %s\n" % (c_x, c_y, scores[i], dist_mat[c_x, c_y])
         else:
-            print c_x+1, c_y+1, scores[i], dist_mat[c_x, c_y]
+            print(c_x+1, c_y+1, scores[i], dist_mat[c_x, c_y])
     if outfile:
         with open(outfile, 'w') as outf:
             outf.write(outstr)
@@ -88,7 +81,7 @@ def get_ppv(fasta_filename, c_filename, pdb_filename, factor=1.0,
     acc = fasta_filename.split('.')[-2][-5:-1]
 
     ### get sequence
-    seq = parse_fasta.read_fasta(open(fasta_filename, 'r')).values()[0][0]
+    seq = list(parse_fasta.read_fasta(open(fasta_filename, 'r')).values())[0][0]
     ref_len = len(seq)
 
     ### get top ranked predicted contacts
@@ -137,7 +130,7 @@ def get_ppv(fasta_filename, c_filename, pdb_filename, factor=1.0,
         j = 0
         gapped_cb_lst = []
 
-        for i in xrange(len(atom_seq_ali)):
+        for i in range(len(atom_seq_ali)):
             if atom_seq_ali[i] == '-':
                 gapped_cb_lst.append(['-'])
             elif seq_ali[i] == '-':
@@ -155,9 +148,9 @@ def get_ppv(fasta_filename, c_filename, pdb_filename, factor=1.0,
    
         PPV, TP, FP = get_ppv_helper(contacts_x, contacts_y, ref_contact_map, ref_len, factor, atom_seq_ali=atom_seq_ali)
     if name:
-        print '%s %s %s %s' % (name, PPV, TP, FP)
+        print('%s %s %s %s' % (name, PPV, TP, FP))
     else:
-        print '%s %s %s %s %s' % (fasta_filename, c_filename, PPV, TP, FP)
+        print('%s %s %s %s %s' % (fasta_filename, c_filename, PPV, TP, FP))
     return (pdb_filename, PPV, TP, FP)
   
     
@@ -167,7 +160,7 @@ def get_ppv_hbond(fasta_filename, c_filename, hbond_filename,
     acc = fasta_filename.split('.')[-2][-5:-1]
 
     ### get sequence
-    seq = parse_fasta.read_fasta(open(fasta_filename, 'r')).values()[0][0]
+    seq = list(parse_fasta.read_fasta(open(fasta_filename, 'r')).values())[0][0]
     ref_len = len(seq)
  
     ### get top "factor" * "ref_len" predicted contacts
@@ -212,7 +205,7 @@ def get_ppv_hbond(fasta_filename, c_filename, hbond_filename,
     
     PPV, TP, FP = get_ppv_helper(contacts_x, contacts_y, ref_contact_map, ref_len, factor)
 
-    print '%s %s %s %s' % (hbond_filename, PPV, TP, FP)
+    print('%s %s %s %s' % (hbond_filename, PPV, TP, FP))
     return (hbond_filename, PPV, TP, FP)
 
 
