@@ -21,7 +21,7 @@ def read_fasta(afile, query_id=''):
         # check for header
         if aline.startswith('>'):
             if header != '' and seq != '':
-                if seq_dict.has_key(header):
+                if header in seq_dict:
                     seq_dict[header].append(seq)
                 else:
                     seq_dict[header] = [seq]
@@ -38,7 +38,7 @@ def read_fasta(afile, query_id=''):
 
     # add last entry
     if header != '':
-        if seq_dict.has_key(header):
+        if header in seq_dict:
             seq_dict[header].append(seq)
         else:
             seq_dict[header] = [seq]
@@ -66,7 +66,7 @@ def read_fasta_pdb(afile, query_id=''):
         # check for header
         if aline.startswith('>'):
             if header != '' and seq != '':
-                if seq_dict.has_key(header):
+                if header in seq_dict:
                     seq_dict[header].append(seq)
                 else:
                     seq_dict[header] = [seq]
@@ -83,7 +83,7 @@ def read_fasta_pdb(afile, query_id=''):
 
     # add last entry
     if header != '':
-        if seq_dict.has_key(header):
+        if header in seq_dict:
             seq_dict[header].append(seq)
         else:
             seq_dict[header] = [seq]

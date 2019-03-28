@@ -222,7 +222,7 @@ def get_coordinates(pdbfile, chain):
         res_dict[res_i].append(np.array(atm))
 
     pdbfile.close()
-    return sorted(res_dict.iteritems(), key=operator.itemgetter(0))
+    return sorted(res_dict.items(), key=operator.itemgetter(0))
 
 
 def get_res_dict(pdbfile, chain):
@@ -548,9 +548,9 @@ def get_atom_seq(pdbfile, chain='', model=1, return_lines=False):
 
     line_lst = [
         l[1]
-        for l in sorted(line_dict.iteritems(), key=operator.itemgetter(0))
+        for l in sorted(line_dict.items(), key=operator.itemgetter(0))
     ]
-    res_lst = sorted(res_dict.iteritems(), key=operator.itemgetter(0))
+    res_lst = sorted(res_dict.items(), key=operator.itemgetter(0))
     atom_seq = ''
 
     for res in res_lst:
