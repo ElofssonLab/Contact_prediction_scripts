@@ -18,7 +18,7 @@ result = pconsc4.predict(model, alignment)
 #plot contact map
 import matplotlib.pyplot as plt
 plt.imshow(result['cmap'], cmap='Purples')
-plt.savefig('contact_map_AFP1.png', dpi=300)
+plt.savefig('contact_map_B5Y0C2.png', dpi=300)
 
 #define sequence
 seq = ''.join(line.strip()
